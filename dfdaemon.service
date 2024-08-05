@@ -5,13 +5,12 @@ After=network-online.target
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/dfdaemon --config /etc/dragonfly/dfdaemon.yaml
+ExecStart=/usr/bin/dfdaemon --config /etc/dragonfly/dfdaemon.yaml --verbose
 
 Type=simple
 Environment=HOME=/root
 
-Restart=always
-RestartSec=5
+Restart=on-success
 
 # Limit CPU usage to 1 CPU core
 CPUQuota=100%
@@ -20,7 +19,7 @@ CPUQuota=100%
 CPUWeight=400
 
 # Limit Memory usage to 4G, beyond that the process will be OOM killed
-MemoryLimit=4G
+MemoryMax=4G
 
 [Install]
 WantedBy=multi-user.target
