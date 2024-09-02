@@ -96,6 +96,12 @@ jobs:
           tar -czf "$dirname.tar.gz" "$dirname"
           echo "CLIENT_TAR_ASSET=$dirname.tar.gz" >> $GITHUB_ENV
 
+      - name: Upload Release Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: client-tar
+          path: ${{ env.CLIENT_TAR_ASSET }}
+
   release:
     runs-on: ubuntu-latest
     needs: [release-github]
